@@ -1,0 +1,30 @@
+{
+  "name": "manager-employee-directory",
+  "version": "1.0.0",
+  "description": "This application is designed to generate an html file containing information on employees, interns, and managers based on user input from the command line. Prompts indicate to the user the options to add another employee and select the employee type. Answers to these prompts are used to populate the html file with the appropriate employee information.",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib",
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jaymemizelle/manager-employee-directory.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jaymemizelle/manager-employee-directory/issues"
+  },
+  "homepage": "https://github.com/jaymemizelle/manager-employee-directory#readme",
+  "dependencies": {
+    "inquirer": "^7.3.3"
+  },
+  "devDependencies": {
+    "jest": "^26.6.3"
+  }
+}
