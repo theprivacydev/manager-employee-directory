@@ -1,6 +1,6 @@
 
 body {
-    background-color: rgb(160, 205, 241);
+    background-color: rgb(155, 169, 180);
 }
 
 header {
@@ -19,4 +19,8 @@ header {
 
 .manager {
     margin-left: 30px;
+}
+
+.card, .list-group-item {
+    background-color: rgb(154, 186, 212);
 }

@@ -2,6 +2,10 @@ const inquirer = require('inquirer');
 const fs = require('fs');
 const generateHTML = require('./src/generateHTML');
 const Employee = require('./lib/employee');
+const Engineer = require('./lib/engineer.js');
+const Intern = require('./lib/intern.js');
+const Manager = require('./lib/manager.js');
+
 
 
 const startQuestions = [
@@ -112,19 +116,32 @@ inquirer.prompt(startQuestions).then((response) => {
     switch (response.addEmployee) {
         case 'Engineer':
             console.log('in engineer', response);
-            inquirer.prompt(engineerQuestions).then((response) => generateHTML);
+            inquirer.prompt(engineerQuestions).then((response) => { 
+                writeToFile('index.html',  generateHTML({...response}));
+            });
             break;
 
         case 'Intern':
-            inquirer.prompt(internQuestions).then((response) => generateHTML);
+            inquirer.prompt(internQuestions).then((response) => { 
+                writeToFile('index.html',  generateHTML({...response}));
+            });
             break;
 
         case 'I\'m done adding employees.':
-            generateHTML
+            writeToFile('index.html',  generateHTML({...response}));
             break;
 
         default:
-            console.log('in default', response).then((response) => generateHTML);
-            generateHTML
+            console.log('in default', response);
+            writeToFile('index.html',  generateHTML({...response}));
     }
 });
+
+
+function writeToFile(fileName, data) {
+    console.log(data); 
+    fs.writeFile(fileName, data, err => {
+        err ? console.error(err) 
+        : console.log('Success! File has been generated!')
+    });
+}
