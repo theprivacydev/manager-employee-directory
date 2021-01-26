@@ -1,7 +1,22 @@
+
 body {
-    background-color: steelblue;
+    background-color: rgb(160, 205, 241);
 }
 
 header {
     text-align: center;
+    background-color: grey;
+    color: black;
+    margin-top: 0;
+    height: 100px;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.employeeDirTitle {
+    padding-top: 20px;
+}
+
+.manager {
+    margin-left: 30px;
 }

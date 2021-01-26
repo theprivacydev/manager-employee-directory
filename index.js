@@ -1,8 +1,10 @@
 const inquirer = require('inquirer');
 const fs = require('fs');
 const generateHTML = require('./src/generateHTML');
+const Employee = require('./lib/employee');
 
-const questions = [
+
+const startQuestions = [
     {
         type: 'input',
         message: 'Hello! Please enter the Team Manager\'s name to begin!',
@@ -56,6 +58,16 @@ const engineerQuestions = [
         message: 'What is the Engineer\'s GitHub username?',
         name: 'engineerGithub',
     },
+    {
+        type: 'list',
+        message: 'Which employee would you like to add to finish building your team?',
+        name: 'addEmployee',
+        choices: [
+            'Engineer',
+            'Intern',
+            'I\'m done adding employees.',
+        ],
+    },
 ]
 
 
@@ -80,26 +92,39 @@ const internQuestions = [
         message: 'What is the Intern\'s school?',
         name: 'internSchool',
     },
+    {
+        type: 'list',
+        message: 'Which employee would you like to add to finish building your team?',
+        name: 'addEmployee',
+        choices: [
+            'Engineer',
+            'Intern',
+            'I\'m done adding employees.',
+        ],
+    },
 ]
 
 
 
-inquirer.prompt(questions).then((response) => {
-    console.log(response);
-    switch (response) {
-        case (response.addEmployee === 'Engineer'):
-            inquirer.prompt(engineerQuestions);
+inquirer.prompt(startQuestions).then((response) => {
+    // console.log('we are in inquirer prompt response:', response);
+
+    switch (response.addEmployee) {
+        case 'Engineer':
+            console.log('in engineer', response);
+            inquirer.prompt(engineerQuestions).then((response) => generateHTML);
             break;
 
-        case (response.addEmployee === 'Intern'):
-            inquirer.prompt(internQuestions);
+        case 'Intern':
+            inquirer.prompt(internQuestions).then((response) => generateHTML);
             break;
 
-        case (response.addEmployee === 'I\'m done adding employees.'):
+        case 'I\'m done adding employees.':
             generateHTML
             break;
 
         default:
+            console.log('in default', response).then((response) => generateHTML);
             generateHTML
     }
 });
