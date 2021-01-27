@@ -1,6 +1,6 @@
 const inquirer = require('inquirer');
 const fs = require('fs');
-const generateHTML = require('./src/generateHTML');
+const generateHTML = require('./src/generateHTML.js');
 const Employee = require('./lib/employee');
 const Engineer = require('./lib/engineer.js');
 const Intern = require('./lib/intern.js');
@@ -60,7 +60,7 @@ const engineerQuestions = [
     {
         type: 'input',
         message: 'What is the Engineer\'s GitHub username?',
-        name: 'engineerGithub',
+        name: 'github',
     },
     {
         type: 'list',
@@ -117,23 +117,23 @@ inquirer.prompt(startQuestions).then((response) => {
         case 'Engineer':
             console.log('in engineer', response);
             inquirer.prompt(engineerQuestions).then((response) => { 
-                writeToFile('index.html',  generateHTML({...response}));
+                writeToFile('./dist/index.html',  generateHTML({...response}));
             });
             break;
 
         case 'Intern':
             inquirer.prompt(internQuestions).then((response) => { 
-                writeToFile('index.html',  generateHTML({...response}));
+                writeToFile('./dist/index.html',  generateHTML({...response}));
             });
             break;
 
         case 'I\'m done adding employees.':
-            writeToFile('index.html',  generateHTML({...response}));
+            writeToFile('./dist/index.html',  generateHTML({...response}));
             break;
 
         default:
             console.log('in default', response);
-            writeToFile('index.html',  generateHTML({...response}));
+            writeToFile('./dist/index.html',  generateHTML({...response}));
     }
 });
 

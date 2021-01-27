@@ -4,12 +4,10 @@ const Engineer = require('../lib/engineer.js');
 const Intern = require('../lib/intern.js');
 const Manager = require('../lib/manager.js');
 
-const 
-
 function generateHTML (data) {
     console.log('we are in generatehtml:', data);
-    const newManager = new Manager(data.managerName, data.managerId, data.managerEmail, 'Manager', data.officeNumber);
-    const newEngineer = new Engineer(data.engineerName, data.engineerid, data.engineerEmail, 'Engineer', data.engineerGithub);
+    const newManager = new Manager(data.managerName, data.managerId, data.managerEmail, data.officeNumber);
+    const newEngineer = new Engineer(data.engineerName, data.engineerId, data.engineerEmail, data.github);
     const newIntern = new Intern(data.internName, data.internId, data.internEmail, 'Intern', data.internSchool)
 
     return `<!DOCTYPE html>
@@ -33,11 +31,11 @@ function generateHTML (data) {
                 <div class="card manager" id="manager-card" style="width: 18rem;">
                     <div class="card-body">
                         <!-- Name Appends here -->
-                    <h5 class="card-title">${newManager.managerName}</h5> 
+                    <h5 class="card-title">${newManager.name}</h5> 
                     <h6 class="card-subtitle mb-2">Manager </h6>
                     <ul class="list-group list-group-flush">
-                        <li class="list-group-item" id="manager-id">ID: ${newManager.managerId}</li>
-                        <li class="list-group-item" id="manager-email">Email: ${newManager.managerEmail}</li>
+                        <li class="list-group-item" id="manager-id">ID: ${newManager.id}</li>
+                        <li class="list-group-item" id="manager-email">Email: ${newManager.email}</li>
                         <li class="list-group-item" id="manager-officeNumber">Office Number: ${newManager.officeNumber}</li>
                       </ul>
                     </div>
@@ -58,11 +56,6 @@ function generateHTML (data) {
     
     </body>
     </html>`
-
-
 }
-
-
-
 
 module.exports = generateHTML;

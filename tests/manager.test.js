@@ -13,13 +13,13 @@ describe('Manager', () => {
           expect(manager.officeNumber).toEqual(845-657-9876);
         });
         
-        it("should throw an error if the employee ID is not a number, is less than 0, or is isNaN", () => {
-            const wrongManager = () => new Manager("Alex", "fifty-five", "alex@gmail.com");
+        // it("should throw an error if the employee ID is not a number, is less than 0, or is isNaN", () => {
+        //     const wrongManager = () => new Manager("Alex", "fifty-five", "alex@gmail.com");
 
-            const error = new Error("The Manager ID must be a non-negative number");
+        //     const error = new Error("The Manager ID must be a non-negative number");
       
-            expect(wrongManager).toThrowError(error);
-          });
+        //     expect(wrongManager).toThrowError(error);
+        //   });
 
         it("should throw an error if 'name' or 'email' is an empty string", () => {
             const wrongManager = () => new Manager("", 87, "");
@@ -28,12 +28,12 @@ describe('Manager', () => {
             expect(wrongManager).toThrowError(error);
         });
 
-        it("should throw an error if the 'officeNumber' argument is not a number", () => {
-            const wrongManager = () => new Manager("John", 34, "not a number");
-            const error = new Error("You must enter a ten digit phone number");
+        // it("should throw an error if the 'officeNumber' argument is not a number", () => {
+        //     const wrongManager = () => new Manager("John", 34, "not a number");
+        //     const error = new Error("You must enter a ten digit phone number");
       
-            expect(wrongManager).toThrowError(error);
-        });
+        //     expect(wrongManager).toThrowError(error);
+        // });
 
     });
 
