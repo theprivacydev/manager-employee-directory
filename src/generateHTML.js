@@ -32,7 +32,7 @@ function generateHTML (data) {
                     <div class="card-body">
                         <!-- Name Appends here -->
                     <h5 class="card-title">${newManager.name}</h5> 
-                    <h6 class="card-subtitle mb-2">Manager </h6>
+                    <h6 class="card-subtitle mb-2 text-muted">Manager</h6>
                     <ul class="list-group list-group-flush">
                         <li class="list-group-item" id="manager-id">ID: ${newManager.id}</li>
                         <li class="list-group-item" id="manager-email">Email: ${newManager.email}</li>
@@ -42,6 +42,11 @@ function generateHTML (data) {
                 </div>
             <!-- End column -->
             </div>
+
+        ${createEngineerCard(newEngineer.name, newEngineer.id, newEngineer.email, newEngineer.github)}
+        ${createInternCard(newIntern.name, newIntern.id, newIntern.email, newIntern.school)}
+
+
         <!-- End row -->
         </div>
     
@@ -56,6 +61,44 @@ function generateHTML (data) {
     
     </body>
     </html>`
+}
+
+
+function createEngineerCard (name, id, email, github) {
+    return `<div class="col">
+    <div class="card engineer" id="engineer-card" style="width: 18rem;">
+        <div class="card-body">
+            <!-- Name appends here -->
+        <h5 class="card-title">${name}</h5> 
+        <h6 class="card-subtitle mb-2 text-muted">Engineer</h6>
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item" id="manager-id">ID: ${id}</li>
+            <li class="list-group-item" id="manager-email">Email: ${email}</li>
+            <li class="list-group-item" id="manager-officeNumber">Github: ${github}</li>
+          </ul>
+        </div>
+    </div>
+<!-- End column -->
+</div>`
+}
+
+
+function createInternCard (name, id, email, school) {
+    return `<div class="col">
+    <div class="card engineer" id="engineer-card" style="width: 18rem;">
+        <div class="card-body">
+            <!-- Name appends here -->
+        <h5 class="card-title">${name}</h5> 
+        <h6 class="card-subtitle mb-2 text-muted">intern</h6>
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item" id="manager-id">ID: ${id}</li>
+            <li class="list-group-item" id="manager-email">Email: ${email}</li>
+            <li class="list-group-item" id="manager-officeNumber">School: ${school}</li>
+          </ul>
+        </div>
+    </div>
+<!-- End column -->
+</div>`
 }
 
 module.exports = generateHTML;
