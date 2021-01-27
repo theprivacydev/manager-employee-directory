@@ -1,6 +1,4 @@
-const { toBindingIdentifierName } = require('@babel/types');
-const { expect } = require('@jest/globals');
-const { describe } = require('yargs');
+
 const Employee = require('../lib/employee.js');
 
 describe('Employee', () => {
@@ -22,21 +20,12 @@ describe('Employee', () => {
             expect(wrongEmployee).toThrowError(error);
           });
 
-        it("should throw an error if 'name' is not a string", () => {
+        it("should throw an error if 'name', 'id', or 'email' is an empty string", () => {
             const wrongEmployee = () => new Employee("", 340, "email@gmail.com");
-            const error = new Error("Must enter employee name");
+            const error = new Error("Must enter employee information");
       
             expect(wrongEmployee).toThrowError(error);
         });
-
-
-        it("should throw an error if provided no arguments", () => {
-            const wrongEmployee = () => new Employee();
-
-            const error = new Error("You must provide the name, id, and email of the employee");
-      
-            expect(wrongEmployee).toThrow(error);
-          });
 
     });
 
