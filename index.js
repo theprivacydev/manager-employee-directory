@@ -6,16 +6,17 @@ const Engineer = require('./lib/engineer.js');
 const Intern = require('./lib/intern.js');
 const Manager = require('./lib/manager.js');
 
+// const userTeam = [];
 
-
+// Prompts user for manager info to begin building team
 const startQuestions = [
     {
         type: 'input',
-        message: 'Hello! Please enter the Team Manager\'s name to begin!',
+        message: 'Hello! Please enter the Team Manager\'s name to begin building your team!',
         name: 'managerName',
     },
     {
-        type: 'input',
+        type: 'number',
         message: 'What is the manager\'s employee id?',
         name: 'managerId',
     },
@@ -25,7 +26,7 @@ const startQuestions = [
         name: 'managerEmail',
     },
     {
-        type: 'input',
+        type: 'number',
         message: 'What is the managers office number?',
         name: 'officeNumber',
     },
@@ -36,11 +37,13 @@ const startQuestions = [
         choices: [
             'Engineer',
             'Intern',
+            'Manager',
             'I\'m done adding employees.',
         ],
-    },
+    }
 ]
 
+// Prompts user for engineer information if selected
 const engineerQuestions = [
     {
         type: 'input',
@@ -48,7 +51,7 @@ const engineerQuestions = [
         name: 'engineerName',
     },
     {
-        type: 'input',
+        type: 'number',
         message: 'What is the Engineer\'s employee ID?',
         name: 'engineerId',
     },
@@ -62,19 +65,9 @@ const engineerQuestions = [
         message: 'What is the Engineer\'s GitHub username?',
         name: 'github',
     },
-    {
-        type: 'list',
-        message: 'Which employee would you like to add to finish building your team?',
-        name: 'addEmployee',
-        choices: [
-            'Engineer',
-            'Intern',
-            'I\'m done adding employees.',
-        ],
-    },
 ]
 
-
+// Prompts user for intern info if selected
 const internQuestions = [
     {
         type: 'input',
@@ -82,7 +75,7 @@ const internQuestions = [
         name: 'internName',
     },
     {
-        type: 'input',
+        type: 'number',
         message: 'What is the Intern\'s employee ID?',
         name: 'internId',
     },
@@ -96,46 +89,61 @@ const internQuestions = [
         message: 'What is the Intern\'s school?',
         name: 'internSchool',
     },
-    {
-        type: 'list',
-        message: 'Which employee would you like to add to finish building your team?',
-        name: 'addEmployee',
-        choices: [
-            'Engineer',
-            'Intern',
-            'I\'m done adding employees.',
-        ],
-    },
 ]
 
 
+function initializeApp() {
+    // Create the html fileName
+    writeToFile('./dist/generatedHTML.html',  generateHTML());
+    //Prompt inquirer questions
+    promptUserForTeam();
+}
 
-inquirer.prompt(startQuestions).then((response) => {
-    // console.log('we are in inquirer prompt response:', response);
+function promptUserForTeam() {
+    inquirer.prompt(startQuestions).then(handleResponse)
+}
 
-    switch (response.addEmployee) {
-        case 'Engineer':
-            console.log('in engineer', response);
-            inquirer.prompt(engineerQuestions).then((response) => { 
-                writeToFile('./dist/index.html',  generateHTML({...response}));
-            });
-            break;
+function handleResponse (response) {
+        console.log('we are in inquirer prompt response:', response);
+    
+        switch (response.addEmployee) {
+            case 'Engineer':
+                console.log('in engineer', response);
+                inquirer.prompt(engineerQuestions).then((response) => { 
+                    const newEngineer = new Engineer((response.name, response.id, response.email, response.github));
+                    console.log(newEngineer);
+                   fs.appendFileSync('./dist/generatedHTML.html', newEngineer.buildEngineerHTML());
+                   inquirer.prompt(startQuestions.addEmployee);
+                });
+                break;
+    
+            case 'Intern':
+                inquirer.prompt(internQuestions).then((response) => {
+                    const newIntern = new Intern((response.name, response.id, response.email, response.school));
+                    fs.appendFileSync('./dist/generatedHTML.html', newIntern.buildInternHTML());
+                    inquirer.prompt(startQuestions.addEmployee);
+                });
+                break;
+    
+            case 'I\'m done adding employees.':
+                fs.appendFileSync('./dist/generatedHTML.html', closeHTMLTags());
+                break;
+    
+            default:
+                console.log('in default', response);
+                const newManager = new Manager((response.name, response.id, response.email, response.officeNumber));
+                fs.appendFileSync('./dist/generatedHTML.html', response.buildManagerHTML());
+        }
+}
 
-        case 'Intern':
-            inquirer.prompt(internQuestions).then((response) => { 
-                writeToFile('./dist/index.html',  generateHTML({...response}));
-            });
-            break;
 
-        case 'I\'m done adding employees.':
-            writeToFile('./dist/index.html',  generateHTML({...response}));
-            break;
+function closeHTMLTags () {
+    return `    <!-- End row -->
+                </div>
+            <body>
+            <html>`
+}
 
-        default:
-            console.log('in default', response);
-            writeToFile('./dist/index.html',  generateHTML({...response}));
-    }
-});
 
 
 function writeToFile(fileName, data) {
@@ -145,3 +153,5 @@ function writeToFile(fileName, data) {
         : console.log('Success! File has been generated!')
     });
 }
+
+initializeApp();
