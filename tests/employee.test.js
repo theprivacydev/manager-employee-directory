@@ -12,20 +12,13 @@ describe('Employee', () => {
           expect(employee.email).toEqual("james@gmail.com");
         });
         
-        // it("should throw an error if the employee ID is not a number, is less than 0, or is isNaN", () => {
-        //     const wrongEmployee = () => new Employee("Mary", "four-sixty", "Mary@gmail.com");
 
-        //     const error = new Error("The Employee ID must be a non-negative number");
+        it("should throw an error if 'name' or 'email' is an empty string", () => {
+            const wrongEmployee = () => new Employee("", 90, "");
+            const error = new Error("Must enter employee information");
       
-        //     expect(wrongEmployee).toThrowError(error);
-        //   });
-
-        // it("should throw an error if 'name' or 'email' is an empty string", () => {
-        //     const wrongEmployee = () => new Employee("", 90, "");
-        //     const error = new Error("Must enter employee information");
-      
-        //     expect(wrongEmployee).toThrowError(error);
-        // });
+            expect(wrongEmployee).toThrowError(error);
+        });
 
     });
 
