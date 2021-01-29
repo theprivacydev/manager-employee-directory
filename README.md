@@ -33,6 +33,7 @@ After running node.js in the command line, answer the prompts from the command l
 * https://drive.google.com/file/d/1Zy4wEtbYkDs6QVFhdQKf4cVCBbu8fUjN/view
 
 ## Link to Example File
+* https://github.com/jaymemizelle/manager-employee-directory/blob/main/dist/generatedHTML.html
 
 ## License
 
