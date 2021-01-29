@@ -19,7 +19,7 @@ This application is designed to generate an html file containing information on 
 ## Installation
 To install this application, simply clone this repository, open index.js in the integrated terminal, and run the following from the command line:
 ```
-$npm i inquirer 
+$npm i inquirer jest
 $git ignore node_modules 
 $node index.js (to start application) 
 ```
