@@ -27,6 +27,8 @@ $node index.js (to start application)
 ## Usage
 After running node.js in the command line, answer the prompts from the command line to populate the sections of the HTML file. The HTML will be generated automatically when you start the application, and when you answer the prompts, it will populate the file with your team's information!
 
+![app screenshot](./lib/app-screenshot.png)
+
 ## Walkthrough Video
 
 ## Link to Example File
