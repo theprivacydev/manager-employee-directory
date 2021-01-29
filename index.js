@@ -107,14 +107,11 @@ function promptUserForTeam() {
 }
 
 // Handles the users responses depending on which employee they selected to add
-function handleResponse (response) {
-        console.log('we are in inquirer prompt response:', response);
-        switch (response.addEmployee) {
+function handleResponse( response ) {
+        switch( response.addEmployee ) {
             case 'Manager':
-                console.log('in manager case', response);
-                inquirer.prompt(managerQuestions).then((response) => { 
-                    const newManager = new Manager((response.name, response.id, response.email, response.officeNumber));
-                    console.log(newManager);
+                inquirer.prompt( managerQuestions ).then( response => {
+                    const newManager = new Manager( response.name, response.id, response.email, response.officeNumber );
                    fs.appendFileSync('./dist/generatedHTML.html', newManager.buildManagerHTML());
                    inquirer.prompt(startQuestion).then(handleResponse);
                 });
@@ -122,19 +119,16 @@ function handleResponse (response) {
 
 
             case 'Engineer':
-                console.log('in engineer case', response);
                 inquirer.prompt(engineerQuestions).then((response) => { 
-                    const newEngineer = new Engineer((response.name, response.id, response.email, response.github));
-                    console.log(newEngineer);
+                    const newEngineer = new Engineer( response.name, response.id, response.email, response.github );
                    fs.appendFileSync('./dist/generatedHTML.html', newEngineer.buildEngineerHTML());
                    inquirer.prompt(startQuestion).then(handleResponse);
                 });
                 break;
     
             case 'Intern':
-                console.log('in intern case:', response);
                 inquirer.prompt(internQuestions).then((response) => {
-                    const newIntern = new Intern((response.name, response.id, response.email, response.school));
+                    const newIntern = new Intern( response.name, response.id, response.email, response.school );
                     fs.appendFileSync('./dist/generatedHTML.html', newIntern.buildInternHTML());
                     inquirer.prompt(startQuestion).then(handleResponse);
                 });

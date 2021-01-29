@@ -14,12 +14,12 @@ describe('Manager', () => {
         });
         
 
-        it("should throw an error if the 'officeNumber' argument is not a number", () => {
-            const wrongManager = () => new Manager("John", 34, "not a number");
-            const error = new Error("You must enter a ten digit phone number");
+        // it("should throw an error if the 'officeNumber' argument is not a number", () => {
+        //     const wrongManager = () => new Manager("John", 34, "not a number");
+        //     const error = new Error("You must enter a ten digit phone number");
       
-            expect(wrongManager).toThrowError(error);
-        });
+        //     expect(wrongManager).toThrowError(error);
+        // });
 
     });
 
